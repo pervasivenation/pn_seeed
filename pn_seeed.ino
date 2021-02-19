@@ -29,17 +29,16 @@ void setup(void)
     lora.setDeciveMode(LWOTAA);
     lora.setDataRate(DR0, EU868);
 
-    lora.setChannel(0, 867.1);
-    lora.setChannel(1, 867.3);
-    lora.setChannel(2, 867.5);
-    lora.setChannel(3, 867.7);
-    lora.setChannel(4, 867.9);
-    lora.setChannel(5, 868.1);
-    lora.setChannel(6, 868.3);
-    lora.setChannel(7, 868.5);
+    lora.setChannel(0, 868.1);
+    lora.setChannel(1, 868.3);
+    lora.setChannel(2, 868.5);
+    lora.setChannel(3, 867.1);
+    lora.setChannel(4, 867.3);
+    lora.setChannel(5, 867.5);
+    lora.setChannel(6, 867.7);
+    lora.setReceiceWindowFirst(0, 868.1);
+    lora.setReceiceWindowSecond(869.5, DR3);
 
-    lora.setReceiceWindowFirst(0, 867.1);
-    lora.setReceiceWindowSecond(868.5, DR3);
     lora.setDutyCycle(false);
     lora.setJoinDutyCycle(false);
     lora.setPower(30);
