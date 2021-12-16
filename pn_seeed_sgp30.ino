@@ -3,7 +3,6 @@
 #include "sensirion_common.h"
 #include "sgp30.h"
 
-
 //unsigned char buffer[128] = {0xef, 0xff, 0x55, 3, 4, 5, 6, 7, 8, 9,};
 unsigned char data[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA,};
 char buffer[256];
@@ -96,38 +95,39 @@ void loop(void)
         Serial.print("CO2eq Concentration:");
         Serial.print(co2_eq_ppm);
         Serial.println("ppm");
+
+        //SPG30 VOC and eCO2 gas sensor - end
+        
+        SerialUSB.println("Send string packet to Pervasive Nation NOC.");
+        //This sketch will broadcast a string to Pervasive Nation Network 
+        result = lora.transferPacket("tvoc_ppb!", tvoc_ppb);
+        
+        if(result)
+        {
+            short length;
+            short rssi;
+            SerialUSB.print("Result is: ");
+            memset(buffer, 0, 256);
+            length = lora.receivePacket(buffer, 256, &rssi);
+            if(length)
+            {
+                SerialUSB.print("Length is: ");
+                SerialUSB.println(length);
+                SerialUSB.print("RSSI is: ");
+                SerialUSB.println(rssi);
+                SerialUSB.print("Data is: ");
+                for(unsigned char i = 0; i < length; i ++)
+                {
+                    SerialUSB.print("0x");
+                    SerialUSB.print(buffer[i], HEX);
+                    SerialUSB.print(" ");
+                }
+                SerialUSB.println();
+            }
     } else {
         Serial.println("error reading IAQ values\n");
     }
-    //SPG30 VOC and eCO2 gas sensor - end
-    
-    SerialUSB.println("Send string packet to Pervasive Nation NOC.");
-    //This sketch will broadcast a string to Pervasive Nation Network 
-    result = lora.transferPacket("SampleData!", 10);
-    
-    if(result)
-    {
-        short length;
-        short rssi;
-        SerialUSB.print("Result is: ");
-        memset(buffer, 0, 256);
-        length = lora.receivePacket(buffer, 256, &rssi);
-        if(length)
-        {
-            SerialUSB.print("Length is: ");
-            SerialUSB.println(length);
-            SerialUSB.print("RSSI is: ");
-            SerialUSB.println(rssi);
-            SerialUSB.print("Data is: ");
-            for(unsigned char i = 0; i < length; i ++)
-            {
-                SerialUSB.print("0x");
-                SerialUSB.print(buffer[i], HEX);
-                SerialUSB.print(" ");
-            }
-            SerialUSB.println();
-        }
-        SerialUSB.print("Sleep for 240000 ms (4minutes) ");
-        delay(240000);
     }
+    SerialUSB.print("Sleep for 240000 ms (4minutes) ");
+    delay(240000);
 }
