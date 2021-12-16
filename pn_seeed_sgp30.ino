@@ -7,6 +7,12 @@
 unsigned char data[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0xA,};
 char buffer[256];
 
+//These Guides are useful for the SGP30_Gas_Sensor to measure MEASURE IAQ (tVOC / CO2eq) AND SIGNAL VALUES. 
+//https://github.com/Seeed-Studio/SGP30_Gas_Sensor
+//https://wiki.seeedstudio.com/Grove-VOC_and_eCO2_Gas_Sensor-SGP30/
+//https://wiki.seeedstudio.com/How_to_install_Arduino_Library/
+//https://files.seeedstudio.com/wiki/Grove-VOC_and_eCO2_Gas_Sensor-SGP30/res/Sensirion_Gas_Sensors_SGP30_Driver-Integration-Guide_HW_I2C.pdf
+
 void setup(void)
 {
     //SPG30 VOC and eCO2 gas sensor - end
