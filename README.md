@@ -76,3 +76,56 @@ Send data from Pervasive Nation network:
 Hex: 0x6E 0x65 0x74 0x77 0x6F 0x72 0x6B 0x68 0x6
 
 MSG: networkhi
+
+
+
+_____________________________________________________________________________________________________________________________________________________________
+
+TemperatureLoraWan.ino
+
+- Connect the Shield to the Seeduino LoraWan board
+- Attach temperature sensor V1.2 at the A0 port
+
+- Upload the code
+- Replace the lora.setID() values with the values that appear on the serial monitor
+- Generate a random appkey at ttn and replace it to the lora.setkey()
+
+-Sample output:
+
+16:47:05.280 -> +ID: DevAddr, 27:01:14:C1
+16:47:05.280 -> +ID: DevEui, 8C:F9:57:20:00:02:E5:70
+16:47:05.280 -> +ID: AppEui, 8C:F9:57:20:00:00:00:00
+16:47:05.561 -> +ID: DevAddr, 00:02:E5:70
+16:47:05.561 -> +ID: DevEui, 8C:F9:57:20:00:02:E5:70
+16:47:05.561 -> +ID: AppEui, 8C:F9:57:20:00:00:00:00
+16:47:05.634 -> +KEY: NWKSKEY 14100A104343A00D68CC60AFCFF48EEE
+16:47:06.721 -> +KEY: APPSKEY 14100A104343A00D68CC60AFCFF48EEE
+16:47:07.817 -> +KEY: APPKEY 14100A104343A00D68CC60AFCFF48EEE
+16:47:08.950 -> +MODE: LWOTAA
+16:47:10.104 -> +DR: EU868
+16:47:11.070 -> +DR: DR0
+16:47:11.103 -> +DR: EU868 DR0  SF12 BW125K 
+16:47:12.183 -> +CH: 0,868100000,DR0:DR5
+16:47:13.273 -> +CH: 1,868300000,DR0:DR5
+16:47:14.369 -> +CH: 2,868500000,DR0:DR5
+16:47:15.470 -> +CH: 3,867100000,DR0:DR5
+16:47:16.584 -> +CH: 4,867300000,DR0:DR5
+16:47:17.686 -> +CH: 5,867500000,DR0:DR5
+16:47:18.794 -> +CH: 6,867700000,DR0:DR5
+16:47:19.894 -> +RXWIN1: 0,868100000
+16:47:21.001 -> +RXWIN2: 869500000,DR3
+16:47:22.075 -> +LW: DC, OFF, 0
+16:47:23.182 -> +LW: JDC, OFF
+16:47:24.293 -> +POWER: 14
+16:47:25.421 -> +JOIN: Start
+16:47:25.421 -> +JOIN: NORMAL
+16:47:31.477 -> temperature = 24.88
+16:47:31.477 -> Send string packet to Pervasive Nation NOC.
+16:47:39.453 -> +MSG: LoRaWAN modem is busy
+16:47:39.453 -> +JOIN: Network joined
+16:47:39.453 -> +JOIN: NetID 000013 DevAddr 27:01:14:B7
+16:47:39.453 -> +JOIN: Done
+16:47:39.453 -> temperature = 24.80
+
+
+
