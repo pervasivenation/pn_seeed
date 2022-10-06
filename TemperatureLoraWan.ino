@@ -5,33 +5,13 @@ const int B = 4275;               // B value of the thermistor
 const int R0 = 100000;            // R0 = 100k
 const int pinTempSensor = A0;     // Grove - Temperature Sensor connect to A0
  
-#if defined(ARDUINO_ARCH_AVR)
-#define debug  Serial
-#elif defined(ARDUINO_ARCH_SAMD) ||  defined(ARDUINO_ARCH_SAM)
-#define debug  SerialUSB
-#else
-#define debug  Serial
-#endif
-// 
-//void setup()
-//{
-//    Serial.begin(9600);
-//}
-// 
-//void loop()
-//{
-//    int a = analogRead(pinTempSensor);
-// 
-//    float R = 1023.0/a-1.0;
-//    R = R0*R;
-// 
-//    float temperature = 1.0/(log(R/R0)/B+1/298.15)-273.15; // convert to temperature via datasheet
-// 
-//    Serial.print("temperature = ");
-//    Serial.println(temperature);
-// 
-//    delay(1000);
-//}
+//#if defined(ARDUINO_ARCH_AVR)
+//#define debug  Serial
+//#elif defianed(ARDUINO_ARCH_SAMD) ||  defined(ARDUINO_ARCH_SAM)
+//#define debug  SerialUSB
+//#else
+//#define debug  Serial
+//#endif
 
 #include <LoRaWan.h>
 
@@ -41,8 +21,8 @@ char buffer[256];
 
 void setup(void)
 {
-    SerialUSB.begin(115200);
-    while(!SerialUSB);
+//    SerialUSB.begin(115200);
+//    while(!SerialUSB);
     
     lora.init();
 
@@ -50,20 +30,20 @@ void setup(void)
 
     lora.getVersion(buffer, 256, 1);
 
-    SerialUSB.print(buffer); 
+//    SerialUSB.print(buffer); 
 
     memset(buffer, 0, 256);
     lora.getId(buffer, 256, 1);
-    SerialUSB.print(buffer);
+//    SerialUSB.print(buffer);
 
     //REPLACE THESE VALUES:
+    //lora.setId("270114A6", "70B3D57ED8000D13", "34E3B942A8072E29CC3025A074CA2CB2");
 //    lora.setId(char *DevAddr, char *DevEUI, char *AppEUI);
-//    lora.setKey(char *NwkSKey, char *AppSKey, char *AppKey);
-    lora.setId("0002E570", "8CF957200002E577", "8CF9572000000000");
+//    lora.setKey(char *NwkSKey, char *AppSKey, char *AppKey);00DBBF7C763121C5
+   // lora.setKey("", "34E3B942A8072E29CC3025A074CA2CB2", "34E3B942A8072E29CC3025A074CA2CB2");
+    lora.setId("27011491", "8CF957200002E570", "8CF9572000000000");
     lora.setKey("14100A104343A00D68CC60AFCFF48EEE", "14100A104343A00D68CC60AFCFF48EEE", "14100A104343A00D68CC60AFCFF48EEE");
-
-
- 
+    
     lora.setDeciveMode(LWOTAA);
     lora.setDataRate(DR0, EU868);
 
@@ -81,7 +61,7 @@ void setup(void)
     lora.setJoinDutyCycle(false);
     lora.setPower(30);
     while(!lora.setOTAAJoin(JOIN)){
-      SerialUSB.println("Trying to Join network");
+//      SerialUSB.println("Trying to Join network");
     }
 }
 
@@ -98,10 +78,10 @@ void loop(void)
     char myTemp[8];     // empty string
     dtostrf(temperature, 6, 2, myTemp);
  
-    Serial.print("temperature = ");
-    Serial.println(temperature);
+ //   Serial.print("temperature = ");
+ //   Serial.println(temperature);
 
-    SerialUSB.println("Send string packet to Pervasive Nation NOC.");
+ //   SerialUSB.println("Send string packet to Pervasive Nation NOC.");
     //This sketch will broadcast a string to Pervasive Nation Network
      
     result = lora.transferPacket(myTemp, 8);
@@ -110,25 +90,25 @@ void loop(void)
     {
         short length;
         short rssi;
-        SerialUSB.print("Result is: ");
+   //     SerialUSB.print("Result is: ");
         memset(buffer, 0, 256);
         length = lora.receivePacket(buffer, 256, &rssi);
         if(length)
         {
-            SerialUSB.print("Length is: ");
-            SerialUSB.println(length);
-            SerialUSB.print("RSSI is: ");
-            SerialUSB.println(rssi);
-            SerialUSB.print("Data is: ");
+   //         SerialUSB.print("Length is: ");
+   //         SerialUSB.println(length);
+    //        SerialUSB.print("RSSI is: ");
+    //        SerialUSB.println(rssi);
+    //        SerialUSB.print("Data is: ");
             for(unsigned char i = 0; i < length; i ++)
             {
-                SerialUSB.print("0x");
-                SerialUSB.print(buffer[i], HEX);
-                SerialUSB.print(" ");
+   //             SerialUSB.print("0x");
+   //             SerialUSB.print(buffer[i], HEX);
+   //             SerialUSB.print(" ");
             }
-            SerialUSB.println();
+   //         SerialUSB.println();
         }
-        SerialUSB.print("Sleep for 60000 ms (1minutes) ");
+   //     SerialUSB.print("Sleep for 60000 ms (1minutes) ");
         delay(60000);
     }
 }
