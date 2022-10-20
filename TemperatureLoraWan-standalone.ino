@@ -37,27 +37,39 @@ void setup(void)
 //    SerialUSB.print(buffer);
 
     //REPLACE THESE VALUES:
-    lora.setId("270114A6", "00DBBF7C763121C4", "8CF9572000000000");
- 
-    lora.setDeciveMode(LWOTAA);
+//    lora.setId(char *DevAddr, char *DevEUI, char *AppEUI);
+//    lora.setKey(char *NwkSKey, char *AppSKey, char *AppKey);00DBBF7C763121C5
+    lora.setId("27011474", "70B3D57ED8000D3C", "8CF9572000000040");
+    lora.setKey("FD6D5B1566B84B8D94BFB352C1ECC0DB", "FD6D5B1566B84B8D94BFB352C1ECC0DB", "FD6D5B1566B84B8D94BFB352C1ECC0DB");
+
+    lora.setDeciveMode(LWABP);
+//    lora.setDeciveMode(LWOTAA);
     lora.setDataRate(DR0, EU868);
 
-    lora.setChannel(0, 868.1);
-    lora.setChannel(1, 868.3);
-    lora.setChannel(2, 868.5);
-    lora.setChannel(3, 867.1);
-    lora.setChannel(4, 867.3);
-    lora.setChannel(5, 867.5);
-    lora.setChannel(6, 867.7);
-    lora.setReceiceWindowFirst(0, 868.1);
+    lora.setChannel(0, 867.7);
+    lora.setChannel(1, 867.9);
+    lora.setChannel(2, 868.8);
+ 
+    lora.setReceiceWindowFirst(0, 867.7);
     lora.setReceiceWindowSecond(869.5, DR3);
+
+ 
+ //   lora.setChannel(0, 868.1);
+ //   lora.setChannel(1, 868.3);
+ //   lora.setChannel(2, 868.5);
+ //   lora.setChannel(3, 867.1);
+ //   lora.setChannel(4, 867.3);
+ //   lora.setChannel(5, 867.5);
+ //   lora.setChannel(6, 867.7);
+ //   lora.setReceiceWindowFirst(0, 868.1);
+ //   lora.setReceiceWindowSecond(869.5, DR3);
 
     lora.setDutyCycle(false);
     lora.setJoinDutyCycle(false);
     lora.setPower(30);
-    while(!lora.setOTAAJoin(JOIN)){
+//    while(!lora.setOTAAJoin(JOIN)){
 //      SerialUSB.println("Trying to Join network");
-    }
+//    }
 }
 
 void loop(void)
@@ -104,6 +116,6 @@ void loop(void)
    //         SerialUSB.println();
         }
    //     SerialUSB.print("Sleep for 60000 ms (1minutes) ");
-        delay(60000);
+        delay(100000);
     }
 }
