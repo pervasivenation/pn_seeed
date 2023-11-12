@@ -39,37 +39,47 @@ void setup(void)
     //REPLACE THESE VALUES:
 //    lora.setId(char *DevAddr, char *DevEUI, char *AppEUI);
 //    lora.setKey(char *NwkSKey, char *AppSKey, char *AppKey);00DBBF7C763121C5
-    lora.setId("27011474", "70B3D57ED8000D3C", "8CF9572000000040");
-    lora.setKey("FD6D5B1566B84B8D94BFB352C1ECC0DB", "FD6D5B1566B84B8D94BFB352C1ECC0DB", "FD6D5B1566B84B8D94BFB352C1ECC0DB");
+   // lora.setId("27011484", "70B3D57ED80004DC", "8CF9572000000044");
+   // lora.setKey("FD6D5B1566B84B8D94BFB352C1ECC0DC", "FD6D5B1566B84B8D94BFB352C1ECC0DC", "FD6D5B1566B84B8D94BFB352C1ECC0DC");
 
-    lora.setDeciveMode(LWABP);
+    //lora.setDeciveMode(LWABP);
 //    lora.setDeciveMode(LWOTAA);
+   // lora.setDataRate(DR0, EU868);
+
+    //lora.setChannel(0, 867.7);
+    //lora.setChannel(1, 867.9);
+    //lora.setChannel(2, 868.8);
+ 
+    //lora.setReceiceWindowFirst(0, 867.7);
+    //lora.setReceiceWindowSecond(869.5, DR3);
+
+ 
+    //lora.setChannel(0, 868.1);
+    //lora.setChannel(1, 868.3);
+    //lora.setChannel(2, 868.5);
+    //lora.setChannel(3, 867.1);
+    //lora.setChannel(4, 867.3);
+    //lora.setChannel(5, 867.5);
+    //lora.setChannel(6, 867.7);
+    //lora.setReceiceWindowFirst(0, 868.1);
+    //lora.setReceiceWindowSecond(869.5, DR3);
+    //    DevAddr, DevEUI, AppEUI/JoinEUI
+    lora.setId("27011484", "70B3D57ED80004DC", "8CF9572000000044");
+    lora.setKey("2B7E151628AED2A6ABF7158809CF4F3C", "2B7E151628AED2A6ABF7158809CF4F3C", "2B7E151628AED2A6ABF7158809CF4F3C");
+    
+    lora.setDeciveMode(LWOTAA);
     lora.setDataRate(DR0, EU868);
-
-    lora.setChannel(0, 867.7);
-    lora.setChannel(1, 867.9);
-    lora.setChannel(2, 868.8);
- 
-    lora.setReceiceWindowFirst(0, 867.7);
+    
+    lora.setChannel(0, 868.1);
+    lora.setChannel(1, 868.3);
+    lora.setChannel(2, 868.5);
+    
+    lora.setReceiceWindowFirst(0, 868.1);
     lora.setReceiceWindowSecond(869.5, DR3);
-
- 
- //   lora.setChannel(0, 868.1);
- //   lora.setChannel(1, 868.3);
- //   lora.setChannel(2, 868.5);
- //   lora.setChannel(3, 867.1);
- //   lora.setChannel(4, 867.3);
- //   lora.setChannel(5, 867.5);
- //   lora.setChannel(6, 867.7);
- //   lora.setReceiceWindowFirst(0, 868.1);
- //   lora.setReceiceWindowSecond(869.5, DR3);
-
     lora.setDutyCycle(false);
     lora.setJoinDutyCycle(false);
-    lora.setPower(30);
-//    while(!lora.setOTAAJoin(JOIN)){
-//      SerialUSB.println("Trying to Join network");
-//    }
+    lora.setPower(14);
+    while(!lora.setOTAAJoin(JOIN));
 }
 
 void loop(void)
@@ -85,8 +95,9 @@ void loop(void)
     char myTemp[8];     // empty string
     dtostrf(temperature, 6, 2, myTemp);
  
- //   Serial.print("temperature = ");
- //   Serial.println(temperature);
+   // Serial.print("temperature = ");
+  //  Serial.println(temperature);
+  
 
  //   SerialUSB.println("Send string packet to Pervasive Nation NOC.");
     //This sketch will broadcast a string to Pervasive Nation Network
@@ -116,6 +127,7 @@ void loop(void)
    //         SerialUSB.println();
         }
    //     SerialUSB.print("Sleep for 60000 ms (1minutes) ");
-        delay(100000);
+        delay(36000000);
+        //delay(60000);
     }
 }
